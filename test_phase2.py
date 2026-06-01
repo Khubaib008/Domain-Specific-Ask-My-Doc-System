@@ -170,10 +170,21 @@ def test_graph_compilation():
 
     from src.generation.graph import build_rag_graph
 
-    g1 = build_rag_graph(use_reranker=False, prompt_version="v1")
+    # Use a fake vector store so graph compilation doesn't need a real API key.
+    # This tests that the LangGraph wiring is correct, not that embeddings work.
+    class FakeVectorStore:
+        def search(self, query, k=5, filter_dict=None):
+            return []
+        @property
+        def count(self):
+            return 0
+
+    fake_vs = FakeVectorStore()
+
+    g1 = build_rag_graph(vector_store=fake_vs, use_reranker=False, prompt_version="v1")
     print("  Phase 1 graph compiled (Retrieve -> Generate) [OK]")
 
-    g2 = build_rag_graph(use_reranker=True, prompt_version="v2")
+    g2 = build_rag_graph(vector_store=fake_vs, use_reranker=True, prompt_version="v2")
     print("  Phase 2 graph compiled (Retrieve -> Rerank -> Generate) [OK]")
 
     print("  Graph compilation tests passed [OK]")
