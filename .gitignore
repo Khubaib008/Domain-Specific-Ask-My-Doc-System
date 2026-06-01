@@ -1,0 +1,45 @@
+# Secrets — NEVER commit
+.env
+
+# Virtual environments
+.venv-langchain/
+env/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Local vector databases and indexes
+data/chroma_db/
+data/eval_chroma_db/
+data/test_chroma_db/
+data/test_empty_db/
+data/test_e2e_db/
+data/_test_*/
+data/test_hybrid_db/
+chroma.sqlite3
+*.pkl
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Claude AI assistant config
+.claude/
+
+# Backup files
+backup_README.md
+
+# Scratch files
+extra.txt

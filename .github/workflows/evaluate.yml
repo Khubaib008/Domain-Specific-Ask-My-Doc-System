@@ -1,0 +1,61 @@
+name: RAG Evaluation CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+env:
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+
+jobs:
+  evaluate:
+    name: Ragas Evaluation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      - name: Create virtual environment
+        run: uv venv .venv --python 3.12
+
+      - name: Install dependencies
+        run: uv pip install -r requirements.txt --python .venv/bin/python
+
+      - name: Run Phase 2 verification
+        run: .venv/bin/python test_phase2.py
+
+      - name: Run Ragas evaluation
+        id: eval
+        run: |
+          .venv/bin/python run_eval.py --threshold 0.85 2>&1 | tee eval_output.txt
+        continue-on-error: false
+
+      - name: Upload evaluation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-results
+          path: eval_output.txt
+
+      - name: Check faithfulness threshold
+        run: |
+          if grep -q "OVERALL: FAIL" eval_output.txt; then
+            echo "FAIL: Faithfulness score below 0.85 threshold"
+            exit 1
+          else
+            echo "PASS: All metrics above threshold"
+          fi
