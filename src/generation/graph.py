@@ -131,7 +131,7 @@ def _create_chat_llm() -> BaseLanguageModel:
     """
     gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
     if gemini_key:
-        model = os.getenv("GEMINI_CHAT_MODEL", "gemini-2.0-flash")
+        model = os.getenv("GEMINI_CHAT_MODEL", "gemini-2.5-flash-lite")
         print(f"[chat] Using Gemini: {model}")
         return ChatGoogleGenerativeAI(
             model=model,
