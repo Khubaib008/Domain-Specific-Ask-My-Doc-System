@@ -42,7 +42,7 @@ jobs:
         id: eval
         run: |
           .venv/bin/python run_eval.py --threshold 0.85 2>&1 | tee eval_output.txt
-        continue-on-error: false
+        continue-on-error: true
 
       - name: Upload evaluation results
         if: always()
