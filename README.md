@@ -8,7 +8,7 @@
 
 Hybrid Retrieval • Cross-Encoder Reranking • Citation Enforcement • Automated Evaluation
 
-[![CI](https://github.com/Khubaib008/rag-system/actions/workflows/evaluate.yml/badge.svg)](https://github.com/Khubaib008/rag-system/actions/workflows/evaluate.yml)
+[![CI](https://github.com/Khubaib008/Domain-Specific-Ask-My-Doc-System/actions/workflows/evaluate.yml/badge.svg)](https://github.com/Khubaib008/Domain-Specific-Ask-My-Doc-System/actions/workflows/evaluate.yml)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -33,10 +33,10 @@ The system combines:
 
 The objective is to generate answers that are:
 
-✅ Relevant
-✅ Faithful to source documents
-✅ Fully cited
-✅ Automatically evaluated through CI/CD
+--Relevant
+--Faithful to source documents
+--Fully cited
+--Automatically evaluated through CI/CD
 
 ---
 
@@ -148,7 +148,7 @@ Optional:
 ## Clone Repository
 
 ```bash
-git clone https://github.com/Khubaib008/rag-system.git
+git clone https://github.com/Khubaib008/Domain-Specific-Ask-My-Doc-System.git
 cd rag-system
 ```
 
@@ -193,7 +193,7 @@ COHERE_API_KEY=your_cohere_key
 
 ---
 
-# ▶️ Running the Application
+# Running the Application
 
 Start the API server:
 
